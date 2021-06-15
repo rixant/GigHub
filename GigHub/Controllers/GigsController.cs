@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Data.Entity.Validation;
+using System;
+using System.Linq;
 using System.Web.Mvc;
 using GigHub.Models;
 using GigHub.ViewModels;
@@ -32,19 +34,37 @@ namespace GigHub.Controllers
         [HttpPost]
         public ActionResult Create(GigFormViewModel viewModel)
         {
-            var artistId = User.Identity.GetUserId();
-            var artist = _context.Users.Single(u => u.Id == artistId);
-            var genre = _context.Genres.Single(g => g.Id == viewModel.Genre);
             var gig = new Gig
             {
-                Artist = artist,
-                DateTime = System.DateTime.Parse(string.Format("{0}-{1}", viewModel.Date, viewModel.Time)),
-                Genre = genre,
+                ArtistId = User.Identity.GetUserId(),
+                DateTime = viewModel.DateTime,
+                GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
             };
 
             _context.Gigs.Add(gig);
-            _context.SaveChanges();
+            try
+            {
+                // Your code...
+                // Could also be before try if you know the exception occurs in SaveChanges
+
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+           
 
             return RedirectToAction("Index", "Home");
 
