@@ -194,12 +194,17 @@
     <Compile Include="Migrations\202106152020298_AddForeignKeyProperties.Designer.cs">
       <DependentUpon>202106152020298_AddForeignKeyProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106162122550_AddNameToApplicationUser.cs" />
+    <Compile Include="Migrations\202106162122550_AddNameToApplicationUser.Designer.cs">
+      <DependentUpon>202106162122550_AddNameToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
@@ -266,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RegisterViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106152020298_AddForeignKeyProperties.resx">
       <DependentUpon>202106152020298_AddForeignKeyProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106162122550_AddNameToApplicationUser.resx">
+      <DependentUpon>202106162122550_AddNameToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
